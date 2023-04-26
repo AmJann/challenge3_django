@@ -1,6 +1,6 @@
 from django.db import models
 import random
-from django.core.validators import MaxValueValidator, MinValueValidator
+from user.models import User
 
 class FourDigitIDField(models.IntegerField):
     def __init__(self, *args, **kwargs):
@@ -20,9 +20,9 @@ class FourDigitIDField(models.IntegerField):
 
 class Player(models.Model):
     id = FourDigitIDField(primary_key=True)
-    word = models.CharField(max_length=50,unique=True)
-    score = models.IntegerField()
-    username = models.ForeignKey(User, on_delete=models.CASCADE)
+    word = models.CharField(max_length=50)
+    score_value = models.IntegerField()
+    user = models.ForeignKey(User, on_delete=models.CASCADE)
 
     def __str__(self):
         return f"{self.name} | {self.word}"
@@ -39,4 +39,3 @@ class Computer(models.Model):
         return self.word
 
 
-# Create your models here.
