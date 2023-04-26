@@ -21,7 +21,7 @@ class FourDigitIDField(models.IntegerField):
 class Player(models.Model):
     id = FourDigitIDField(primary_key=True)
     word = models.CharField(max_length=50)
-    score_value = models.IntegerField()
+    score_value = models.IntegerField(null=True)
     user = models.ForeignKey(User, on_delete=models.CASCADE)
 
     def __str__(self):

@@ -16,27 +16,27 @@ class CheckUser(generics.ListAPIView):
 
 class addScore(generics.CreateAPIView):
     queryset = Score.objects.all()
-    searlizer_class = ScoreSerializer
+    serializer_class = ScoreSerializer
 
 
 
 class TopScoresView(generics.ListAPIView):
     def get(self, request):
-        num_records = int(request.get_param.get('num_records',100))
-        queryset = Score.obects.order_by('-score')[:num_records]
+        num_records = int(request.query_params.get('num_records',100))
+        queryset = Score.objects.select_related('user').order_by('-score')[:num_records]
         serializer = ScoreSerializer(queryset, many=True)
         return Response(serializer.data)
 
 
 class getScorebyGameId(generics.ListAPIView):
     def get(self, request):
-        gameCode = request.get_params.get('gameCode', None)
-        num_records = request.get_param.get('num_records',100)
+        gameCode = int(request.query_params.get('gameCode', None))
+        num_records = request.query_params.get('num_records',100)
 
         if num_records.lower() == 'all':
-            queryset = Score.obects.filter(game_code = gameCode).order_by('-score')
+            queryset = Score.objects.select_related('user').filter(game_code = gameCode).order_by('-score')
         else:
-            queryset = Score.obects.filter(game_code = gameCode).order_by('-score')[:num_records]
+            queryset = Score.objects.select_related('user').filter(game_code = gameCode).order_by('-score')[:int(num_records)]
 
 
         serializer = ScoreSerializer(queryset, many=True)
