@@ -25,8 +25,9 @@ class PlayerViewUpdateDelete(generics.RetrieveUpdateDestroyAPIView):
 
 def random_computer(request):
     computer = Computer.objects.order_by("?").first()
-    data = {"word": computer.word, "score": computer.score}
+    data = {"word": computer.word, "score": computer.score_value}
     return JsonResponse(data)
+
 
 
 
