@@ -99,10 +99,10 @@ WSGI_APPLICATION = 'game_django.wsgi.application'
 DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.postgresql',
-        'NAME': 'game',
-        'USER': 'gameuser',
-        'PASSWORD': 'game',
-        'HOST': 'localhost'
+        'NAME': os.environ['DBNAME'],
+        'USER': os.environ['DBUSER'],
+        'PASSWORD': os.environ['DBPASSWORD'],
+        'HOST': os.environ['DBHOST']
     }
 }
 

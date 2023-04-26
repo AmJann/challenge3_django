@@ -1,6 +1,6 @@
 from django.shortcuts import render
-from rest_framework import generics, permissions
-from .serializers import UserSearlizer
+from rest_framework import generics
+from .serializers import *
 from .models import Player
 from .models import Computer
 
@@ -20,9 +20,5 @@ class PlayerViewUpdateDelete(generics.RetrieveUpdateDestroyAPIView):
     queryset = Player.objects.all()
     serializer_class = PlayerSerializer
 
-class TopScoresView(APIView):
-    def get(self, request):
-        top_scores = Player.objects.order_by('-score')[:5]
-        serializer = PlayerSerializer(top_scores, many=True)
-        return Response(serializer.data)
+
 

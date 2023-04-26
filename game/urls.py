@@ -12,6 +12,4 @@ urlpatterns =[
     path('player/<int:id>', views.PlayerViewUpdateDelete.as_view(), name='computer'),
     path('player_update/<uuid:pk>/', views.PlayerViewUpdateDelete.as_view(), name='computer_update'),
     path('player_delete/<uuid:pk>/', views.PlayerViewUpdateDelete.as_view(), name='computer_delete'),
-    path('top-scores/', TopScoresView.as_view(), name='top-scores'),
-
 ]
