@@ -9,5 +9,5 @@ class User(models.Model):
 
 class Score (models.Model):
     score = models.IntegerField()
-    name = models.ForeignKey(User, on_delete=models.CASCADE)
-    game_code = models.ForeignKey("game.Player", on_delete=models.CASCADE)
+    user = models.ForeignKey(User, on_delete=models.CASCADE)
+    game_code = models.ForeignKey("game.Player", on_delete=models.CASCADE, null=True)

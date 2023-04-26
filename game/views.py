@@ -16,8 +16,16 @@ class ComputerViewUpdateDelete(generics.RetrieveUpdateDestroyAPIView):
     serializer_class = ComputerSerializer
 
 class PlayerListCreate(generics.ListCreateAPIView):
-    queryset = Player.objects.all()
-    serializer_class = PlayerSerializer
+    def post(self,request):
+        serializer = PlayerSerializer(data = request.data)
+        if serializer.is_valid():
+            word = request.data.get('word')
+            score = len(word)
+            serializer.save(word=word ,score_value=score)
+            return JsonResponse(serializer.data)
+        else:
+            return JsonResponse(serializer.errors)
+
 
 class PlayerViewUpdateDelete(generics.RetrieveUpdateDestroyAPIView):
     queryset = Player.objects.all()
