@@ -1,6 +1,6 @@
 from django.contrib import admin
-.models import Score
-,models import User
+from .models import Score
+from .models import User
 
 admin.site.register(Score)
 admin.site.register(User)
