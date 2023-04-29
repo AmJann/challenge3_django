@@ -30,8 +30,8 @@ class TopScoresView(generics.ListAPIView):
 
 class getScorebyGameId(generics.ListAPIView):
     def get(self, request):
-        gameCode = int(request.query_params.get('gameCode', None))
-        num_records = request.query_params.get('num_records',100)
+        gameCode = int(request.query_params.get('game_code', 0))
+        num_records = request.query_params.get('num_records','100')
 
         if num_records.lower() == 'all':
             queryset = Score.objects.select_related('user').filter(game_code = gameCode).order_by('-score')
